@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scuffoogle Search Results</title>
+</head>
+<body>
+    <h1>Scuffoogle Search Results</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="query">Enter your search query:</label>
+        <input type="text" name="query" id="query">
+        <button type="submit">Search</button>
+    </form>
+    {% if chat_response %}
+        <h2>Results:</h2>
+        <ul>
+
+                {{ chat_response }}
+
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+</body>
+</html>
