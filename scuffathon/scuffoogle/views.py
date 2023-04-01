@@ -1,16 +1,14 @@
 from django.shortcuts import render
-from .forms import SearchForm
-import requests
 import openai
 
 
 def search_view(request):
     if request.method == 'POST':
         query = request.POST.get('query')
-        newquery = "insult someone who does not know" + query
+        newquery = "harsh insults for someone who does not know" + query + " and write a 100 word essay on why someone who does not know" + query + " is dumb"
         if query:
             # Send user input to the ChatGPT API
-            openai.api_key = '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'
+            openai.api_key = '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'
             response = openai.Completion.create(
                 engine='text-davinci-003',
                 prompt=newquery,
@@ -26,8 +24,3 @@ def search_view(request):
         chat_response = None
 
     return render(request, 'search.html', {'chat_response': chat_response})
-
-
-
-
-# Create your views here.

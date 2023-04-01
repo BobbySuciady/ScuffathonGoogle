@@ -1,26 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Scuffoogle Search Results</title>
+    <title>Hello World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
+    <style>
+        h1 {
+            font-family: 'Product Sans', sans-serif;
+            font-size: 69px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0;
+            margin-top:15%;
+        }
+
+        h1 span:nth-child(1) { color: #4285F4; }
+        h1 span:nth-child(2) { color: #DB4437; }
+        h1 span:nth-child(3) { color: #F4B400; }
+        h1 span:nth-child(4) { color: #0F9D58; }
+        h1 span:nth-child(5) { color: #4285F4; }
+        h1 span:nth-child(6) { color: #DB4437; }
+        h1 span:nth-child(7) { color: #F4B400; }
+        h1 span:nth-child(8) { color: #4285F4; }
+        h1 span:nth-child(9) { color: #0F9D58; }
+        h1 span:nth-child(10) { color: #DB4437; }
+
+        form {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        label {
+            font-size: 24px;
+            margin-right: 16px;
+        }
+
+        input[type="text"] {
+            font-size: 24px;
+            padding: 8px 16px;
+        }
+
+        button[type="submit"] {
+            font-size: 24px;
+            padding: 8px 16px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Scuffoogle Search Results</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="query">Enter your search query:</label>
-        <input type="text" name="query" id="query">
-        <button type="submit">Search</button>
-    </form>
-    {% if chat_response %}
-        <h2>Results:</h2>
-        <ul>
+<h1>
+    <span>S</span>
+    <span>c</span>
+    <span>u</span>
+    <span>f</span>
+    <span>f</span>
+    <span>o</span>
+    <span>o</span>
+    <span>g</span>
+    <span>l</span>
+    <span>e</span>
+</h1>
 
-                {{ chat_response }}
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="query" id="query" oninput="blur()" autocomplete="off" autofill="off">
+    <button type="submit">Search</button>
+</form>
 
-        </ul>
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
+{% if chat_response %}
+    <h2>Results:</h2>
+    {{ chat_response }} <b><p>Go search more about them in Google. Honestly.. imagine not knowing this.</p></b>
+{% else %}
+    <p></p>
+{% endif %}
+
+<script>
+    var form = document.querySelector('form');
+    var position = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    var direction = 1; // 1 = right, -1 = left
+    var verticalDirection = 1; // 1 = down, -1 = up
+
+    function move() {
+        position.x += 5 * direction;
+        position.y += 5 * verticalDirection;
+        form.style.left = position.x + 'px';
+        form.style.top = position.y + 'px';
+
+        // Reverse direction when hitting screen edges
+        if (position.x + form.offsetWidth >= window.innerWidth || position.x <= 0) {
+            direction *= -1;
+        }
+
+        if (position.y + form.offsetHeight >= window.innerHeight || position.y <= 0) {
+            verticalDirection *= -1;
+        }
+
+        requestAnimationFrame(move);
+    }
+
+    move();
+
+    // Add event listener for click events on the document
+    document.addEventListener('click', function(event) {
+        var missed = document.createElement('div');
+        missed.innerText = 'missed.';
+        missed.style.position = 'absolute';
+        missed.style.top = event.clientY + 'px';
+        missed.style.left = event.clientX + 'px';
+        document.body.appendChild(missed);
+
+
+        setTimeout(function() {
+            document.body.removeChild(missed);
+        }, 200);
+    });
+</script>
 
 </body>
 </html>
